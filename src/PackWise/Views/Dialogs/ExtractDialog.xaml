@@ -1,0 +1,114 @@
+<ns:ThemedWindow x:Class="PackWise.Views.Dialogs.ExtractDialog"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:ns="https://northstarlabs.dev/design"
+                   xmlns:vm="clr-namespace:PackWise.ViewModels"
+                   mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:ExtractViewModel}"
+                   IsDialog="True" Width="580" Title="Extract">
+  <Grid Margin="24,20,24,20">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <StackPanel Orientation="Horizontal" Margin="0,0,0,18">
+      <Border Width="40" Height="40" CornerRadius="10" Background="{DynamicResource Brush.AccentSoft}" Margin="0,0,14,0">
+        <ns:GlyphIcon Kind="Extract" Width="24" Height="24" />
+      </Border>
+      <StackPanel VerticalAlignment="Center" MaxWidth="440">
+        <TextBlock Text="{Binding Preview.ArchiveName, StringFormat=Extract {0}}" Style="{StaticResource Text.Subtitle}" TextTrimming="CharacterEllipsis" />
+        <TextBlock Text="{Binding Summary}" Style="{StaticResource Text.Caption}" />
+      </StackPanel>
+    </StackPanel>
+
+    <!-- Destination -->
+    <StackPanel Grid.Row="1" Margin="0,0,0,14">
+      <TextBlock Text="Destination" Style="{StaticResource Text.Label}" />
+      <DockPanel>
+        <Button DockPanel.Dock="Right" Content="Browse…" Margin="8,0,0,0" Click="OnBrowse" />
+        <ComboBox IsEditable="True" ItemsSource="{Binding RecentDestinations}" Text="{Binding Destination, UpdateSourceTrigger=PropertyChanged}" />
+      </DockPanel>
+      <Grid Margin="0,10,0,0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <CheckBox Content="Into a new folder named" IsChecked="{Binding CreateSubfolder}" VerticalAlignment="Center" Margin="0,0,10,0" />
+        <TextBox Grid.Column="1" Text="{Binding SubfolderName, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CreateSubfolder}" MinHeight="28" Padding="7,3" />
+      </Grid>
+      <Grid Margin="0,8,0,0">
+        <TextBlock Text="{Binding FinalDestination, StringFormat=Files go to {0}}" Style="{StaticResource Text.Caption}" TextTrimming="CharacterEllipsis"
+                   TextWrapping="NoWrap" Margin="0,0,180,0" ToolTip="{Binding FinalDestination}" />
+        <TextBlock Text="{Binding SpaceText}" HorizontalAlignment="Right" FontSize="{StaticResource Font.Size.Small}">
+          <TextBlock.Style>
+            <Style TargetType="TextBlock">
+              <Setter Property="Foreground" Value="{DynamicResource Brush.TextTertiary}" />
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding IsSpaceLow}" Value="True">
+                  <Setter Property="Foreground" Value="{DynamicResource Brush.Danger}" />
+                  <Setter Property="FontWeight" Value="SemiBold" />
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </TextBlock.Style>
+        </TextBlock>
+      </Grid>
+    </StackPanel>
+
+    <!-- Existing files -->
+    <StackPanel Grid.Row="2" Margin="0,0,0,14">
+      <TextBlock Text="If a file already exists" Style="{StaticResource Text.Label}" />
+      <WrapPanel>
+        <RadioButton Content="Ask me" Margin="0,0,18,6" IsChecked="{Binding Policy, Converter={StaticResource EnumMatch}, ConverterParameter=Ask}" />
+        <RadioButton Content="Keep both" Margin="0,0,18,6" IsChecked="{Binding Policy, Converter={StaticResource EnumMatch}, ConverterParameter=KeepBoth}" />
+        <RadioButton Content="Skip" Margin="0,0,18,6" IsChecked="{Binding Policy, Converter={StaticResource EnumMatch}, ConverterParameter=Skip}" />
+        <RadioButton Content="Replace" Margin="0,0,18,6" IsChecked="{Binding Policy, Converter={StaticResource EnumMatch}, ConverterParameter=Replace}" />
+      </WrapPanel>
+    </StackPanel>
+
+    <!-- Safety summary -->
+    <ItemsControl Grid.Row="3" ItemsSource="{Binding Notices}" Margin="0,0,0,10">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate DataType="vm:Notice">
+          <Border x:Name="Banner" Margin="0,0,0,6" CornerRadius="6" Padding="12,9" Background="{DynamicResource Brush.InfoSoft}">
+            <DockPanel>
+              <ns:GlyphIcon x:Name="Glyph" Kind="Info" Width="16" Height="16" Margin="0,1,10,0" VerticalAlignment="Top" AccentOpacity="0" />
+              <TextBlock Text="{Binding Text}" TextWrapping="Wrap" />
+            </DockPanel>
+          </Border>
+          <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Kind}" Value="Info">
+              <Setter TargetName="Glyph" Property="Foreground" Value="{DynamicResource Brush.Info}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Kind}" Value="Warning">
+              <Setter TargetName="Banner" Property="Background" Value="{DynamicResource Brush.WarningSoft}" />
+              <Setter TargetName="Glyph" Property="Kind" Value="Warning" />
+              <Setter TargetName="Glyph" Property="Foreground" Value="{DynamicResource Brush.Warning}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Kind}" Value="Danger">
+              <Setter TargetName="Banner" Property="Background" Value="{DynamicResource Brush.DangerSoft}" />
+              <Setter TargetName="Glyph" Property="Kind" Value="Shield" />
+              <Setter TargetName="Glyph" Property="Foreground" Value="{DynamicResource Brush.Danger}" />
+            </DataTrigger>
+          </DataTemplate.Triggers>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+
+    <StackPanel Grid.Row="4" Margin="0,0,0,18">
+      <CheckBox Content="Keep the folder structure from the archive" IsChecked="{Binding PreservePaths}" Margin="0,0,0,8" />
+      <CheckBox Content="Open the destination when finished" IsChecked="{Binding OpenWhenDone}" />
+    </StackPanel>
+
+    <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
+      <Button Content="Cancel" IsCancel="True" Margin="0,0,8,0" />
+      <Button Content="Extract" Style="{StaticResource Button.Accent}" IsDefault="True" Click="OnExtract" />
+    </StackPanel>
+  </Grid>
+</ns:ThemedWindow>

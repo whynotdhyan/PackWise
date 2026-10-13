@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>PackWise.Archiving</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="PackWise.Tests" />
+  </ItemGroup>
+
+  <ItemGroup Condition="Exists('$(SevenZipDll)')">
+    <None Include="$(SevenZipDll)" Link="7z.dll" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    <None Include="$(SevenZipDir)License.txt" Link="licenses\7-Zip.txt" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+  </ItemGroup>
+
+  <Target Name="FetchSevenZipEngine" BeforeTargets="BeforeBuild" Condition="!Exists('$(SevenZipDll)')">
+    <Message Importance="high" Text="7z.dll is missing; fetching the pinned engine release." />
+    <Exec Command="powershell.exe -NoProfile -ExecutionPolicy Bypass -File &quot;$(RepoRoot)eng\Get-SevenZip.ps1&quot;" />
+    <ItemGroup>
+      <None Include="$(SevenZipDll)" Link="7z.dll" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+      <None Include="$(SevenZipDir)License.txt" Link="licenses\7-Zip.txt" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    </ItemGroup>
+  </Target>
+
+</Project>

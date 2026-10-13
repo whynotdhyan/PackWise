@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Fetch archive engine
+        shell: pwsh
+        run: ./eng/Get-SevenZip.ps1
+
+      - name: Test
+        run: dotnet test --project tests/PackWise.Tests -c Release
+
+      - name: Publish
+        shell: pwsh
+        run: ./eng/Publish.ps1 -Version ('${{ github.ref_name }}'.TrimStart('v')) -SkipTests
+
+      # Code signing: when a signing service (for example SignPath Foundation) is set up,
+      # sign artifacts/release/**/PackWise.exe here, before the zip is created.
+
+      - name: Create draft release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: |
+            artifacts/release/*.zip
+            artifacts/release/SHA256SUMS.txt

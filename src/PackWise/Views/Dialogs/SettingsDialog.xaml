@@ -1,0 +1,202 @@
+<ns:ThemedWindow x:Class="PackWise.Views.Dialogs.SettingsDialog"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:ns="https://northstarlabs.dev/design"
+                   xmlns:vm="clr-namespace:PackWise.ViewModels"
+                   mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:SettingsViewModel}"
+                   IsDialog="True" SizeToContent="Manual" Width="680" Height="600" ResizeMode="CanResize" MinHeight="460" Title="Settings">
+  <Grid Margin="24,16,24,20">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <TabControl>
+      <!-- General -->
+      <TabItem Header="General">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="0,18,8,0">
+            <TextBlock Text="APPEARANCE" Style="{StaticResource Text.SectionHeader}" />
+            <WrapPanel Margin="0,0,0,18">
+              <RadioButton Content="Match Windows" Margin="0,0,20,0" IsChecked="{Binding Theme, Converter={StaticResource EnumMatch}, ConverterParameter=System}" />
+              <RadioButton Content="Light" Margin="0,0,20,0" IsChecked="{Binding Theme, Converter={StaticResource EnumMatch}, ConverterParameter=Light}" />
+              <RadioButton Content="Dark" IsChecked="{Binding Theme, Converter={StaticResource EnumMatch}, ConverterParameter=Dark}" />
+            </WrapPanel>
+
+            <TextBlock Text="BROWSING" Style="{StaticResource Text.SectionHeader}" />
+            <CheckBox Content="Show hidden and system files" IsChecked="{Binding ShowHiddenFiles}" Margin="0,0,0,10" />
+            <CheckBox IsChecked="{Binding ShowPreviews}" Margin="0,0,0,18" AutomationProperties.Name="Preview images and text in the details pane">
+              <StackPanel>
+                <TextBlock Text="Preview images and text in the details pane" />
+                <TextBlock Text="Uses Windows' built-in image decoders. Nothing is ever run." Style="{StaticResource Text.Caption}" />
+              </StackPanel>
+            </CheckBox>
+
+            <TextBlock Text="NEW ARCHIVES" Style="{StaticResource Text.SectionHeader}" />
+            <Grid Margin="0,0,0,10">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <TextBlock Text="Default format" VerticalAlignment="Center" />
+              <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <RadioButton Content="ZIP" Margin="0,0,20,0" IsChecked="{Binding DefaultFormat, Converter={StaticResource EnumMatch}, ConverterParameter=zip}" />
+                <RadioButton Content="7Z" IsChecked="{Binding DefaultFormat, Converter={StaticResource EnumMatch}, ConverterParameter=7z}" />
+              </StackPanel>
+            </Grid>
+            <Grid Margin="0,0,0,10">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <TextBlock Text="Default compression" VerticalAlignment="Center" />
+              <ComboBox Grid.Column="1" ItemsSource="{Binding Levels}" SelectedValuePath="Level" SelectedValue="{Binding DefaultLevel}" DisplayMemberPath="Label" Width="200" HorizontalAlignment="Left" />
+            </Grid>
+            <CheckBox Content="Test new archives after creating them" IsChecked="{Binding TestAfterCreate}" />
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- Extraction -->
+      <TabItem Header="Extraction and safety">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="0,18,8,0">
+            <TextBlock Text="INTERNET MARK (MARK OF THE WEB)" Style="{StaticResource Text.SectionHeader}" />
+            <TextBlock Style="{StaticResource Text.Caption}" Margin="0,0,0,10"
+                       Text="Windows remembers which files came from the internet so SmartScreen and Office can warn before they open. PackWise passes that mark from a downloaded archive to the files inside it." />
+            <RadioButton Margin="0,0,0,8" AutomationProperties.Name="Mark every extracted file" IsChecked="{Binding MarkOfTheWeb, Converter={StaticResource EnumMatch}, ConverterParameter=AllFiles}">
+              <TextBlock><Run Text="Mark every extracted file" /><Run Text="  (recommended)" Foreground="{DynamicResource Brush.TextTertiary}" /></TextBlock>
+            </RadioButton>
+            <RadioButton Content="Mark only programs, scripts and macro documents" Margin="0,0,0,8"
+                         IsChecked="{Binding MarkOfTheWeb, Converter={StaticResource EnumMatch}, ConverterParameter=RiskyFilesOnly}" />
+            <RadioButton Content="Don't pass the mark on (less safe)" Margin="0,0,0,18"
+                         IsChecked="{Binding MarkOfTheWeb, Converter={StaticResource EnumMatch}, ConverterParameter=Off}" />
+
+            <TextBlock Text="WHEN A FILE ALREADY EXISTS" Style="{StaticResource Text.SectionHeader}" />
+            <WrapPanel Margin="0,0,0,10">
+              <RadioButton Content="Ask me" Margin="0,0,20,6" IsChecked="{Binding ConflictPolicy, Converter={StaticResource EnumMatch}, ConverterParameter=Ask}" />
+              <RadioButton Content="Keep both" Margin="0,0,20,6" IsChecked="{Binding ConflictPolicy, Converter={StaticResource EnumMatch}, ConverterParameter=KeepBoth}" />
+              <RadioButton Content="Skip" Margin="0,0,20,6" IsChecked="{Binding ConflictPolicy, Converter={StaticResource EnumMatch}, ConverterParameter=Skip}" />
+              <RadioButton Content="Replace" Margin="0,0,20,6" IsChecked="{Binding ConflictPolicy, Converter={StaticResource EnumMatch}, ConverterParameter=Replace}" />
+            </WrapPanel>
+            <CheckBox Content="Send replaced files to the Recycle Bin" IsChecked="{Binding RecycleReplacedFiles}" Margin="0,0,0,18" />
+
+            <TextBlock Text="EXTRACTION" Style="{StaticResource Text.SectionHeader}" />
+            <CheckBox Content="Extract multi-file archives into a new folder" IsChecked="{Binding ExtractToNewFolder}" Margin="0,0,0,10" />
+            <CheckBox Content="Open the destination folder when finished" IsChecked="{Binding OpenFolderAfterExtract}" Margin="0,0,0,10" />
+            <CheckBox IsChecked="{Binding KeepDamagedFiles}" Margin="0,0,0,10" AutomationProperties.Name="Keep files that fail their checksum">
+              <StackPanel>
+                <TextBlock Text="Keep files that fail their checksum" />
+                <TextBlock Text="Useful for rescuing partly damaged archives. Kept files are listed in the report." Style="{StaticResource Text.Caption}" />
+              </StackPanel>
+            </CheckBox>
+            <CheckBox Content="Warn before opening programs and scripts from archives" IsChecked="{Binding WarnBeforeOpeningRiskyFiles}" Margin="0,0,0,10" />
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- Windows integration -->
+      <TabItem Header="Windows">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="0,18,8,0">
+            <TextBlock Text="FILE EXPLORER" Style="{StaticResource Text.SectionHeader}" />
+            <CheckBox IsChecked="{Binding ContextMenuEnabled}" Margin="0,0,0,12" AutomationProperties.Name="Add PackWise to the right-click menu">
+              <StackPanel>
+                <TextBlock Text="Add PackWise to the right-click menu" />
+                <TextBlock Style="{StaticResource Text.Caption}" MaxWidth="540"
+                           Text="Compress, extract, test, convert and checksum files straight from File Explorer. On Windows 11 the PackWise menu is under Show more options (Shift+F10)." />
+              </StackPanel>
+            </CheckBox>
+            <CheckBox IsChecked="{Binding AssociationsEnabled}" Margin="0,0,0,8" AutomationProperties.Name="Offer PackWise for archive files">
+              <StackPanel>
+                <TextBlock Text="Offer PackWise in Open with for archive files" />
+                <TextBlock Style="{StaticResource Text.Caption}" MaxWidth="540"
+                           Text="Windows lets only you choose default apps. After turning this on, pick PackWise for .zip, .7z or .rar in Default apps." />
+              </StackPanel>
+            </CheckBox>
+            <Button Content="Open Default apps settings" Style="{StaticResource Button.Link}" HorizontalAlignment="Left" Margin="27,0,0,18"
+                    Command="{Binding OpenDefaultAppsCommand}" />
+
+            <TextBlock Text="SHORTCUTS" Style="{StaticResource Text.SectionHeader}" />
+            <CheckBox Content="Desktop shortcut" IsChecked="{Binding DesktopShortcut}" Margin="0,0,0,18" />
+
+            <Border Style="{StaticResource Banner.Info}">
+              <TextBlock TextWrapping="Wrap"
+                         Text="All of these are per-user settings that need no administrator rights. Uninstalling PackWise removes them completely." />
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- Formats -->
+      <TabItem Header="Formats">
+        <DockPanel Margin="0,18,0,0">
+          <StackPanel DockPanel.Dock="Top">
+            <CheckBox IsChecked="{Binding AllowUntrustedFormats}" Margin="0,0,0,10" AutomationProperties.Name="Also open disk images, file systems, installers and executables">
+              <StackPanel>
+                <TextBlock Text="Also open disk images, file systems, installers and executables" FontWeight="SemiBold" />
+                <TextBlock Style="{StaticResource Text.Caption}" MaxWidth="560"
+                           Text="Off by default. These rarely needed formats have complex parsers and account for most archive-tool security fixes, so PackWise leaves them closed unless you need them." />
+              </StackPanel>
+            </CheckBox>
+            <TextBlock Text="FORMATS AFFECTED BY THIS SETTING" Style="{StaticResource Text.SectionHeader}" Margin="0,8,0,8" />
+          </StackPanel>
+          <ListBox ItemsSource="{Binding UntrustedFormats}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemsPanel>
+              <ItemsPanelTemplate>
+                <WrapPanel />
+              </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding DisplayName}" Width="190" TextTrimming="CharacterEllipsis" />
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </DockPanel>
+      </TabItem>
+
+      <!-- Privacy -->
+      <TabItem Header="Privacy">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="0,18,8,0">
+            <Border Style="{StaticResource Banner.Success}" Margin="0,0,0,18">
+              <TextBlock TextWrapping="Wrap"
+                         Text="PackWise works completely offline. It has no account, no ads and no telemetry, and it never uploads file names, contents, hashes or passwords. Links in the Help menu open in your browser only when you click them." />
+            </Border>
+
+            <TextBlock Text="ACTIVITY LOG" Style="{StaticResource Text.SectionHeader}" />
+            <CheckBox Content="Keep a local log of operations (paths and results, never passwords)" IsChecked="{Binding LoggingEnabled}" Margin="0,0,0,10" />
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+              <TextBlock Text="Delete log files after" VerticalAlignment="Center" Margin="0,0,10,0" />
+              <TextBox Text="{Binding LogRetentionDays}" Width="60" MinHeight="28" Padding="6,3" />
+              <TextBlock Text="days" VerticalAlignment="Center" Margin="10,0,0,0" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,18">
+              <Button Content="Open log folder" Command="{Binding OpenLogsCommand}" Margin="0,0,8,0" />
+              <Button Content="Clear logs" Command="{Binding ClearLogsCommand}" />
+            </StackPanel>
+
+            <TextBlock Text="PASSWORDS" Style="{StaticResource Text.SectionHeader}" />
+            <TextBlock Style="{StaticResource Text.Caption}" Margin="0,0,0,10"
+                       Text="Passwords you type are kept in memory only while PackWise is open, so you aren't asked repeatedly. They are never written to disk." />
+            <Button Content="Forget passwords now" Command="{Binding ForgetPasswordsCommand}" HorizontalAlignment="Left" Margin="0,0,0,18" />
+
+            <TextBlock Text="STORAGE" Style="{StaticResource Text.SectionHeader}" />
+            <TextBlock Style="{StaticResource Text.Caption}" Text="{Binding SettingsLocation, StringFormat='Settings, logs and temporary previews are stored in {0}'}" />
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+    </TabControl>
+
+    <Grid Grid.Row="1" Margin="0,16,0,0">
+      <Button Content="Restore defaults" Style="{StaticResource Button.Link}" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding ResetAllCommand}" />
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button Content="Cancel" IsCancel="True" Margin="0,0,8,0" />
+        <Button Content="Save" Style="{StaticResource Button.Accent}" IsDefault="True" Click="OnSave" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</ns:ThemedWindow>

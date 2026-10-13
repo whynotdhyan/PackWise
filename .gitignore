@@ -1,0 +1,24 @@
+# Build output
+bin/
+obj/
+artifacts/
+publish/
+*.user
+*.suo
+.vs/
+.vscode/
+.idea/
+
+# Test output
+TestResults/
+coverage*/
+
+# Engine binaries are fetched by eng/Get-SevenZip.ps1, never committed.
+third_party/7zip/x64/
+third_party/7zip/arm64/
+third_party/7zip/.download/
+
+# OS noise
+Thumbs.db
+Desktop.ini
+.DS_Store

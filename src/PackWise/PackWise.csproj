@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>PackWise</RootNamespace>
+    <AssemblyName>PackWise</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\PackWise.ico</ApplicationIcon>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Title>PackWise</Title>
+    <Description>Free, offline archive manager for Windows with safe extraction and a duplicate finder.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System.IO" />
+    <Using Include="Northstar.Design.Controls" />
+    <Using Include="Northstar.Design.Dialogs" />
+    <Using Include="Northstar.Design.Icons" />
+    <Using Include="Northstar.Design.Theming" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Northstar.Design\Northstar.Design.csproj" />
+    <ProjectReference Include="..\PackWise.Core\PackWise.Core.csproj" />
+    <ProjectReference Include="..\PackWise.Archiving\PackWise.Archiving.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\PackWise.ico" />
+    <Resource Include="Assets\NorthstarLabs.ico" />
+    <None Include="..\..\LICENSE" Link="licenses\PackWise.txt" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    <None Include="..\..\docs\guide\index.html" Link="guide\index.html" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    <None Include="Assets\PackWise-512.png" Link="guide\PackWise-512.png" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    <None Include="Assets\NorthstarLabs-512.png" Link="guide\NorthstarLabs-512.png" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    <None Include="..\..\THIRD-PARTY-NOTICES.md" Link="licenses\THIRD-PARTY-NOTICES.md" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+  </ItemGroup>
+
+</Project>

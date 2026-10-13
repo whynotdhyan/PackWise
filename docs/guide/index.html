@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PackWise User Guide</title>
+<style>
+  :root {
+    --bg: #f2f4f6; --surface: #ffffff; --text: #1a222b; --muted: #56626e; --faint: #8691a0;
+    --border: #dce1e6; --accent: #0e8a87; --accent-soft: #d5efed; --brand: #052623; --brand-ink: #2ee6c8;
+    --warn-soft: #fff3de;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #14181d; --surface: #1a1f25; --text: #e4e8ec; --muted: #a3adb8; --faint: #76818d;
+      --border: #2b333c; --accent: #2fbfb8; --accent-soft: #173a3b; --warn-soft: #392d1b; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.6 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; }
+  header { background: var(--brand); color: #fff; padding: 40px 24px 36px; }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  header .wrap { display: flex; gap: 22px; align-items: center; }
+  header img { width: 84px; height: 84px; }
+  header h1 { margin: 0; font: 600 32px/1.2 "Segoe UI Variable Display", "Segoe UI", sans-serif; }
+  header p { margin: 6px 0 0; color: #9fcfc7; }
+  nav { position: sticky; top: 0; background: var(--surface); border-bottom: 1px solid var(--border); z-index: 1; }
+  nav .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 8px 16px; }
+  nav a { color: var(--muted); text-decoration: none; padding: 6px 10px; border-radius: 6px; white-space: nowrap; font-size: 14px; }
+  nav a:hover { background: var(--accent-soft); color: var(--text); }
+  main { padding: 28px 16px 60px; }
+  section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 26px 28px; margin-bottom: 18px; }
+  h2 { margin: 0 0 6px; font: 600 22px/1.3 "Segoe UI Variable Display", "Segoe UI", sans-serif; }
+  h3 { margin: 22px 0 6px; font-size: 16px; }
+  .lead { color: var(--muted); margin: 0 0 14px; }
+  ol, ul { padding-left: 22px; margin: 8px 0; }
+  li { margin: 5px 0; }
+  kbd { font: 12px "Cascadia Mono", Consolas, monospace; background: var(--bg); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; }
+  .tip { background: var(--accent-soft); border-radius: 8px; padding: 12px 16px; margin: 14px 0 0; }
+  .note { background: var(--warn-soft); border-radius: 8px; padding: 12px 16px; margin: 14px 0 0; }
+  table { border-collapse: collapse; width: 100%; margin-top: 10px; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--faint); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+  .steps { counter-reset: step; list-style: none; padding: 0; }
+  .steps li { counter-increment: step; position: relative; padding-left: 40px; margin: 12px 0; }
+  .steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 13px;
+    background: var(--accent); color: #fff; font-weight: 600; font-size: 13px; display: grid; place-items: center; }
+  footer { text-align: center; color: var(--faint); font-size: 13px; padding: 0 16px 40px; }
+  footer img { width: 22px; height: 22px; vertical-align: middle; margin-right: 6px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <img src="PackWise-512.png" alt="PackWise logo" />
+    <div>
+      <h1>PackWise User Guide</h1>
+      <p>Open, create and clean up archives safely. Free, offline, no account.</p>
+    </div>
+  </div>
+</header>
+<nav>
+  <div class="wrap">
+    <a href="#start">Get started</a><a href="#open">Open</a><a href="#extract">Extract</a><a href="#create">Create</a>
+    <a href="#explorer">Right-click menu</a><a href="#convert">Convert &amp; test</a><a href="#duplicates">Duplicates</a>
+    <a href="#checksums">Checksums</a><a href="#safety">Safety</a><a href="#keys">Shortcuts</a><a href="#faq">FAQ</a>
+  </div>
+</nav>
+<main class="wrap">
+
+<section id="start">
+  <h2>Get started in a minute</h2>
+  <p class="lead">PackWise looks like a classic archive manager: a toolbar on top, an address bar, the file list and a details pane on the right.</p>
+  <ol class="steps">
+    <li><b>Find your files.</b> Browse folders in the list just like File Explorer. Double-click to go into a folder; press <kbd>Backspace</kbd> to go up.</li>
+    <li><b>Open an archive.</b> Double-click any ZIP, 7Z, RAR or other archive. You can now browse inside it like a folder.</li>
+    <li><b>Use the toolbar.</b> <b>Add</b> packs files, <b>Extract To</b> unpacks, <b>Test</b> checks for damage, <b>View</b> opens a file, <b>Delete</b> removes it.</li>
+    <li><b>Look at the details pane.</b> Select something to see its size, type and a preview of images and text — even inside archives.</li>
+  </ol>
+  <p class="tip">The first time you start PackWise a short tour explains the basics. Open it again with <b>Help › Getting started</b> or <kbd>F1</kbd>.</p>
+</section>
+
+<section id="open">
+  <h2>Open and browse archives</h2>
+  <ul>
+    <li>Double-click an archive, drag it onto the window, or use <b>File › Open archive</b> (<kbd>Ctrl</kbd>+<kbd>O</kbd>).</li>
+    <li>Click any part of the address bar to jump there, or click its empty space to type a path.</li>
+    <li>Type in <b>Filter by name</b> (<kbd>Ctrl</kbd>+<kbd>F</kbd>) to narrow the list. Turn on <b>Whole archive</b> to search every folder inside.</li>
+    <li>Archives inside archives open too — double-click them.</li>
+    <li>Encrypted archives ask for the password once; PackWise remembers it until you close the app.</li>
+  </ul>
+  <p>The status bar shows the archive format and badges such as <b>Encrypted</b>, <b>From the internet</b> or <b>Damaged</b>.</p>
+</section>
+
+<section id="extract">
+  <h2>Extract files</h2>
+  <ol class="steps">
+    <li>Open the archive. Select specific files, or select nothing to extract everything.</li>
+    <li>Click <b>Extract To</b> (<kbd>Alt</kbd>+<kbd>E</kbd>).</li>
+    <li>Check the destination. PackWise suggests a new folder named after the archive and shows the free space.</li>
+    <li>Choose what happens if a file already exists: <b>Ask me</b>, <b>Keep both</b>, <b>Skip</b> or <b>Replace</b>.</li>
+    <li>Read any notices (for example, programs inside the archive), then click <b>Extract</b>.</li>
+  </ol>
+  <h3>Quicker options</h3>
+  <ul>
+    <li><b>Extract here</b> unpacks next to the archive, creating a folder only when the archive has many loose files.</li>
+    <li><b>Extract to its own folder</b> always creates a folder named after the archive.</li>
+  </ul>
+  <p class="note">If a file inside an archive tries to land outside the destination — a known trick in malicious archives — PackWise blocks it and tells you.</p>
+</section>
+
+<section id="create">
+  <h2>Create an archive</h2>
+  <ol class="steps">
+    <li>Browse to your files, select the files and folders you want, and click <b>Add</b> (<kbd>Alt</kbd>+<kbd>A</kbd>).</li>
+    <li>Choose a format: <b>ZIP</b> opens almost anywhere; <b>7Z</b> is usually smaller.</li>
+    <li>Pick a compression level. <b>Balanced</b> is right for most things; photos and videos barely shrink, so <b>Store</b> is fastest for them.</li>
+    <li>Optional: tick <b>Protect with a password</b> for AES-256 encryption. With 7Z you can also hide the file names.</li>
+    <li>Click <b>Create</b>. PackWise tests the new archive automatically.</li>
+  </ol>
+  <p class="note">Nobody, including PackWise, can recover a lost password. Use <b>Generate strong password</b> and store it somewhere safe. Windows File Explorer cannot open encrypted ZIP files; recipients need PackWise, 7-Zip or similar.</p>
+  <p>To add files to an archive you already have, open it and click <b>Add</b>, or drag files onto the window.</p>
+</section>
+
+<section id="explorer">
+  <h2>Right-click menu in File Explorer</h2>
+  <p class="lead">Do common jobs without opening PackWise.</p>
+  <ol class="steps">
+    <li>In File Explorer, select one or more files or folders and right-click.</li>
+    <li>On Windows 11, choose <b>Show more options</b> (or press <kbd>Shift</kbd>+<kbd>F10</kbd>). On Windows 10 the menu appears straight away.</li>
+    <li>Point to <b>PackWise</b> and choose a command.</li>
+  </ol>
+  <table>
+    <tr><th>Command</th><th>What it does</th></tr>
+    <tr><td>Compress to ZIP file / 7Z file</td><td>Packs everything you selected into one archive next to it.</td></tr>
+    <tr><td>Add to archive…</td><td>Opens the full Add dialog with all options.</td></tr>
+    <tr><td>Extract here / to its own folder / to…</td><td>Unpacks the selected archives.</td></tr>
+    <tr><td>Test archive</td><td>Checks every file against its checksum.</td></tr>
+    <tr><td>Convert to ZIP / 7Z</td><td>Re-packs an archive in the other format; the original is kept.</td></tr>
+    <tr><td>Checksums (SHA-256)</td><td>Shows CRC32 and SHA-256 for the selected files.</td></tr>
+    <tr><td>Find duplicates here</td><td>Opens the duplicate finder for the selected folder.</td></tr>
+  </table>
+  <p class="tip">Turn the menu on or off in <b>Settings › Windows</b>.</p>
+</section>
+
+<section id="convert">
+  <h2>Convert and test archives</h2>
+  <ul>
+    <li><b>Commands › Convert to ZIP / 7Z</b> re-packs an archive. PackWise unpacks it privately, compresses it again, tests the result and keeps the original. Passwords carry over.</li>
+    <li><b>Test</b> (<kbd>Alt</kbd>+<kbd>T</kbd>) verifies every file. If something is damaged, the report names the exact files. PackWise does not repair archives; download the file again or extract what is intact.</li>
+    <li><b>Info</b> (<kbd>Alt</kbd>+<kbd>I</kbd>) shows the format, compression, encryption, origin and what PackWise can do with that format.</li>
+  </ul>
+</section>
+
+<section id="duplicates">
+  <h2>Find duplicate files</h2>
+  <ol class="steps">
+    <li>Click <b>Duplicates</b> on the toolbar. The current folder is added automatically; use <b>Add folder…</b> for more.</li>
+    <li>Click <b>Scan for duplicates</b>. PackWise compares file contents, never just names.</li>
+    <li>Review the groups. Use <b>Select all but: Newest / Oldest / Shortest path / In first folder</b> to tick copies quickly.</li>
+    <li>Click <b>Move to Recycle Bin</b>, or <b>Move to review folder…</b> to set them aside.</li>
+  </ol>
+  <ul>
+    <li>PackWise always keeps at least one copy of every group.</li>
+    <li>Online-only OneDrive files are skipped so nothing is downloaded behind your back.</li>
+    <li>Identical copies can be intentional backups — check before removing.</li>
+  </ul>
+</section>
+
+<section id="checksums">
+  <h2>Checksums</h2>
+  <p>Select files and click <b>Checksums</b> to compute CRC32, SHA-256 and SHA-512. Paste a value published by a website into <b>Compare with</b> to confirm your download matches. <b>Save checksum file</b> writes a standard <code>.sha256</code> file; the <b>Verify</b> tab checks one.</p>
+</section>
+
+<section id="safety">
+  <h2>How PackWise keeps you safe</h2>
+  <table>
+    <tr><td><b>Contained extraction</b></td><td>Files can't be written outside the folder you choose. Links and hidden data streams in archives are never created.</td></tr>
+    <tr><td><b>No silent overwrites</b></td><td>You decide every conflict. Replaced files go to the Recycle Bin.</td></tr>
+    <tr><td><b>Internet mark kept</b></td><td>Files from downloaded archives keep Windows' Mark-of-the-Web, so SmartScreen and Office still warn you.</td></tr>
+    <tr><td><b>Honest warnings</b></td><td>Programs, scripts, macro documents and disguised names like <code>invoice.pdf.exe</code> are flagged. This is a hint, not a virus scan.</td></tr>
+    <tr><td><b>Fewer risky formats</b></td><td>Rarely needed formats such as disk images and installers stay closed unless you enable them in <b>Settings › Formats</b>.</td></tr>
+    <tr><td><b>Private</b></td><td>No account, no ads, no telemetry. Nothing is uploaded, ever.</td></tr>
+  </table>
+</section>
+
+<section id="keys">
+  <h2>Keyboard shortcuts</h2>
+  <table>
+    <tr><th>Action</th><th>Keys</th><th>Action</th><th>Keys</th></tr>
+    <tr><td>Add to archive</td><td><kbd>Alt</kbd>+<kbd>A</kbd></td><td>Open archive</td><td><kbd>Ctrl</kbd>+<kbd>O</kbd></td></tr>
+    <tr><td>Extract to</td><td><kbd>Alt</kbd>+<kbd>E</kbd></td><td>Filter / find</td><td><kbd>Ctrl</kbd>+<kbd>F</kbd></td></tr>
+    <tr><td>Test</td><td><kbd>Alt</kbd>+<kbd>T</kbd></td><td>Up one level</td><td><kbd>Backspace</kbd></td></tr>
+    <tr><td>View</td><td><kbd>Alt</kbd>+<kbd>V</kbd></td><td>Back / forward</td><td><kbd>Alt</kbd>+<kbd>←</kbd> / <kbd>→</kbd></td></tr>
+    <tr><td>Information</td><td><kbd>Alt</kbd>+<kbd>I</kbd></td><td>Refresh</td><td><kbd>F5</kbd></td></tr>
+    <tr><td>Delete</td><td><kbd>Del</kbd></td><td>Details pane</td><td><kbd>F9</kbd></td></tr>
+    <tr><td>Duplicate finder</td><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd></td><td>Checksums</td><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>K</kbd></td></tr>
+    <tr><td>Add favourite</td><td><kbd>Ctrl</kbd>+<kbd>D</kbd></td><td>Settings</td><td><kbd>Ctrl</kbd>+<kbd>,</kbd></td></tr>
+    <tr><td>Getting started</td><td><kbd>F1</kbd></td><td>Copy path</td><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd></td></tr>
+  </table>
+</section>
+
+<section id="faq">
+  <h2>Questions</h2>
+  <h3>Can PackWise create RAR files?</h3>
+  <p>No. RAR creation is proprietary. PackWise opens and extracts RAR, and creates ZIP and 7Z.</p>
+  <h3>Why is the right-click menu under "Show more options" on Windows 11?</h3>
+  <p>Windows 11's compact menu only accepts apps with a signed package identity. PackWise uses the classic menu, which works everywhere and needs no administrator rights.</p>
+  <h3>How do I make PackWise open .zip files by default?</h3>
+  <p>Turn on <b>Offer PackWise for archive files</b> in <b>Settings › Windows</b>, then open <b>Default apps</b> and choose PackWise for the file types you want. Windows only lets you, not apps, change defaults.</p>
+  <h3>How do I uninstall?</h3>
+  <p>Open Windows <b>Settings › Apps › Installed apps</b>, find PackWise and choose <b>Uninstall</b>. Your files and archives are not touched.</p>
+  <h3>Where are settings and logs stored?</h3>
+  <p>In <code>%LOCALAPPDATA%\Northstar Labs\PackWise</code>. Logs record operations and paths only — never passwords or file contents — and can be turned off in <b>Settings › Privacy</b>.</p>
+</section>
+
+</main>
+<footer><img src="NorthstarLabs-512.png" alt="" />PackWise is made by Northstar Labs · MIT License</footer>
+</body>
+</html>

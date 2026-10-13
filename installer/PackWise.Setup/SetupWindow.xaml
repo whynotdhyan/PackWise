@@ -1,0 +1,106 @@
+<Window x:Class="PackWise.Setup.SetupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PackWise Setup" Width="720" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Background="{StaticResource Surface}" FontFamily="{StaticResource UI}" FontSize="13" Foreground="{StaticResource Text}"
+        Icon="Assets/PackWise.ico" UseLayoutRounding="True" TextOptions.TextFormattingMode="Display">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="240" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <!-- Brand panel -->
+    <Border Background="{StaticResource Brand}">
+      <DockPanel Margin="28,34,24,24">
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+          <Image Source="Assets/NorthstarLabs-512.png" Width="24" Height="24" Margin="0,0,10,0" RenderOptions.BitmapScalingMode="HighQuality" />
+          <TextBlock Text="Northstar Labs" Foreground="#9FCFC7" VerticalAlignment="Center" FontSize="12" />
+        </StackPanel>
+        <StackPanel>
+          <Image Source="Assets/PackWise-512.png" Width="80" Height="80" HorizontalAlignment="Left" RenderOptions.BitmapScalingMode="HighQuality" />
+          <TextBlock Text="PackWise" Foreground="White" FontFamily="{StaticResource Display}" FontSize="26" FontWeight="SemiBold" Margin="0,18,0,2" />
+          <TextBlock x:Name="VersionText" Foreground="#9FCFC7" />
+          <TextBlock Foreground="#CFE9E4" TextWrapping="Wrap" Margin="0,22,0,0" LineHeight="20"
+                     Text="Open, create and clean up archives safely. Free, offline, no account." />
+        </StackPanel>
+      </DockPanel>
+    </Border>
+
+    <Grid Grid.Column="1" Margin="34,32,32,26" MinHeight="380">
+      <!-- Welcome / options -->
+      <DockPanel x:Name="OptionsPage">
+        <Grid DockPanel.Dock="Bottom" Margin="0,22,0,0">
+          <Button Content="License (MIT)" Style="{StaticResource Link}" HorizontalAlignment="Left" VerticalAlignment="Center" Click="OnLicense" />
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Cancel" Margin="0,0,8,0" IsCancel="True" Click="OnCancel" />
+            <Button x:Name="InstallButton" Content="Install" Style="{StaticResource AccentButton}" IsDefault="True" MinWidth="120" Click="OnInstall" />
+          </StackPanel>
+        </Grid>
+        <StackPanel>
+          <TextBlock x:Name="HeadingText" Text="Install PackWise" FontFamily="{StaticResource Display}" FontSize="22" FontWeight="SemiBold" />
+          <TextBlock x:Name="IntroText" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" Margin="0,6,0,22"
+                     Text="PackWise installs just for you, so it doesn't need administrator rights." />
+
+          <TextBlock Text="INSTALL LOCATION" Foreground="{StaticResource TextTertiary}" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,6" />
+          <Border Background="{StaticResource SurfaceAlt}" BorderBrush="{StaticResource Border}" BorderThickness="1" CornerRadius="6" Padding="12,9" Margin="0,0,0,20">
+            <TextBlock x:Name="LocationText" TextTrimming="CharacterEllipsis" />
+          </Border>
+
+          <TextBlock Text="OPTIONS" Foreground="{StaticResource TextTertiary}" FontSize="11" FontWeight="SemiBold" Margin="0,0,0,10" />
+          <CheckBox x:Name="MenuOption" IsChecked="True" Margin="0,0,0,12">
+            <StackPanel>
+              <TextBlock Text="Add PackWise to the right-click menu" />
+              <TextBlock Foreground="{StaticResource TextTertiary}" FontSize="12" TextWrapping="Wrap"
+                         Text="Compress, extract and convert from File Explorer. On Windows 11, find it under Show more options." />
+            </StackPanel>
+          </CheckBox>
+          <CheckBox x:Name="AssociationOption" IsChecked="True" Margin="0,0,0,12">
+            <StackPanel>
+              <TextBlock Text="Offer PackWise for opening archives" />
+              <TextBlock Foreground="{StaticResource TextTertiary}" FontSize="12" TextWrapping="Wrap"
+                         Text="Adds PackWise to Open with for .zip, .7z, .rar and more. Your default app doesn't change unless you choose." />
+            </StackPanel>
+          </CheckBox>
+          <CheckBox x:Name="DesktopOption" IsChecked="True" Content="Create a desktop shortcut" />
+        </StackPanel>
+      </DockPanel>
+
+      <!-- Progress -->
+      <StackPanel x:Name="ProgressPage" VerticalAlignment="Center" Visibility="Collapsed">
+        <TextBlock Text="Installing PackWise…" FontFamily="{StaticResource Display}" FontSize="22" FontWeight="SemiBold" />
+        <TextBlock x:Name="ProgressText" Foreground="{StaticResource TextSecondary}" Margin="0,6,0,18" Text="Copying files" />
+        <ProgressBar x:Name="Progress" Maximum="1" />
+      </StackPanel>
+
+      <!-- Done -->
+      <DockPanel x:Name="DonePage" Visibility="Collapsed">
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,22,0,0">
+          <Button x:Name="FinishButton" Content="Finish" Style="{StaticResource AccentButton}" IsDefault="True" MinWidth="120" Click="OnFinish" />
+        </StackPanel>
+        <StackPanel>
+          <Border Width="52" Height="52" CornerRadius="26" Background="{StaticResource AccentSoft}" HorizontalAlignment="Left">
+            <Path Data="M14 27l8 8 16-17" Stroke="{StaticResource Accent}" StrokeThickness="3.2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" />
+          </Border>
+          <TextBlock x:Name="DoneHeading" Text="PackWise is ready" FontFamily="{StaticResource Display}" FontSize="22" FontWeight="SemiBold" Margin="0,18,0,6" />
+          <TextBlock Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" LineHeight="20"
+                     Text="Find it in the Start menu. A short tour opens the first time you start it, and Help › Getting started brings it back any time." />
+          <TextBlock Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" Margin="0,12,0,22" LineHeight="20"
+                     Text="To uninstall, use Settings › Apps › Installed apps, like any other app." />
+          <CheckBox x:Name="LaunchOption" IsChecked="True" Content="Start PackWise now" />
+        </StackPanel>
+      </DockPanel>
+
+      <!-- Error -->
+      <DockPanel x:Name="ErrorPage" Visibility="Collapsed">
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,22,0,0">
+          <Button Content="Close" Style="{StaticResource AccentButton}" IsDefault="True" Click="OnCancel" />
+        </StackPanel>
+        <StackPanel>
+          <TextBlock Text="Setup couldn't finish" FontFamily="{StaticResource Display}" FontSize="22" FontWeight="SemiBold" Foreground="{StaticResource Danger}" />
+          <TextBlock x:Name="ErrorText" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" Margin="0,8,0,0" LineHeight="20" />
+        </StackPanel>
+      </DockPanel>
+    </Grid>
+  </Grid>
+</Window>

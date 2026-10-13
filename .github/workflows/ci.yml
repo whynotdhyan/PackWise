@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Fetch archive engine
+        shell: pwsh
+        run: ./eng/Get-SevenZip.ps1
+
+      - name: Build
+        run: dotnet build PackWise.slnx -c Release
+
+      - name: Test
+        run: dotnet test --project tests/PackWise.Tests -c Release --no-build

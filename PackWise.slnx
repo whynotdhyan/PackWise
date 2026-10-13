@@ -1,0 +1,25 @@
+<Solution>
+  <Folder Name="/eng/">
+    <Project Path="eng/IconTool/IconTool.csproj">
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/installer/">
+    <Project Path="installer/PackWise.Setup/PackWise.Setup.csproj">
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Northstar.Design/Northstar.Design.csproj">
+      <Platform Project="x64" />
+    </Project>
+    <Project Path="src/PackWise.Archiving/PackWise.Archiving.csproj" />
+    <Project Path="src/PackWise.Core/PackWise.Core.csproj" />
+    <Project Path="src/PackWise/PackWise.csproj">
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PackWise.Tests/PackWise.Tests.csproj" />
+  </Folder>
+</Solution>

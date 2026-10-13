@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The installer targets .NET Framework 4.8, which is part of every supported Windows 10 and 11
+    release, so Setup.exe runs without any prerequisite. The PackWise app itself is embedded as
+    payload.zip, produced by eng/Publish.ps1.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>PackWise.Setup</RootNamespace>
+    <AssemblyName>PackWise-Setup</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\..\src\PackWise\Assets\PackWise.ico</ApplicationIcon>
+    <Title>PackWise Setup</Title>
+    <Description>Installs PackWise for the current user.</Description>
+    <AnalysisLevel>latest-minimum</AnalysisLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="..\..\src\PackWise\Assets\PackWise-512.png" Link="Assets\PackWise-512.png" />
+    <Resource Include="..\..\src\PackWise\Assets\NorthstarLabs-512.png" Link="Assets\NorthstarLabs-512.png" />
+    <Resource Include="..\..\src\PackWise\Assets\PackWise.ico" Link="Assets\PackWise.ico" />
+  </ItemGroup>
+
+  <ItemGroup Condition="Exists('$(PayloadPath)')">
+    <EmbeddedResource Include="$(PayloadPath)" LogicalName="payload.zip" />
+  </ItemGroup>
+
+</Project>

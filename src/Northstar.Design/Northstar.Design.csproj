@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Northstar.Design</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Description>Northstar Labs design system for WPF: palettes, controls, icons, window chrome and brand marks.</Description>
+  </PropertyGroup>
+
+</Project>

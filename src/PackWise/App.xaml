@@ -1,0 +1,19 @@
+<Application x:Class="PackWise.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ns="https://northstarlabs.dev/design"
+            >
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Northstar.Design;component/Themes/Palette.Light.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Northstar.Design;component/Themes/Controls.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+
+      <ns:BoolToVisibilityConverter x:Key="Visible" />
+      <ns:BoolToVisibilityConverter x:Key="Hidden" Invert="True" />
+      <ns:InverseBoolConverter x:Key="InverseBool" />
+      <ns:EnumMatchConverter x:Key="EnumMatch" />
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

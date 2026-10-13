@@ -1,0 +1,54 @@
+<ns:ThemedWindow x:Class="PackWise.Views.Dialogs.ReportDialog"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:ns="https://northstarlabs.dev/design"
+                   IsDialog="True" Width="620" Title="PackWise">
+  <Grid Margin="24,22,24,20">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <DockPanel Margin="0,0,0,14">
+      <Border x:Name="Badge" Width="40" Height="40" CornerRadius="20" Margin="0,0,14,0" VerticalAlignment="Top">
+        <ns:GlyphIcon x:Name="Glyph" Width="22" Height="22" AccentOpacity="0" StrokeThickness="1.8" />
+      </Border>
+      <StackPanel VerticalAlignment="Center">
+        <TextBlock x:Name="Heading" Style="{StaticResource Text.Subtitle}" TextWrapping="Wrap" />
+        <TextBlock x:Name="SummaryText" Style="{StaticResource Text.Secondary}" Margin="0,3,0,0" />
+      </StackPanel>
+    </DockPanel>
+
+    <ListView x:Name="ProblemList" Grid.Row="1" MaxHeight="300" MinHeight="80" BorderThickness="1" BorderBrush="{DynamicResource Brush.Border}"
+              Visibility="Collapsed" Margin="0,0,0,4">
+      <ListView.View>
+        <GridView>
+          <GridViewColumn Header="Item" Width="250" HeaderContainerStyle="{StaticResource GridView.Header}">
+            <GridViewColumn.CellTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Item}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Item}" Margin="6,0" />
+              </DataTemplate>
+            </GridViewColumn.CellTemplate>
+          </GridViewColumn>
+          <GridViewColumn Header="What happened" Width="310" HeaderContainerStyle="{StaticResource GridView.Header}">
+            <GridViewColumn.CellTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Message}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Message}" Foreground="{DynamicResource Brush.TextSecondary}" />
+              </DataTemplate>
+            </GridViewColumn.CellTemplate>
+          </GridViewColumn>
+        </GridView>
+      </ListView.View>
+    </ListView>
+
+    <Grid Grid.Row="2" Margin="0,18,0,0">
+      <Button x:Name="CopyButton" Content="Copy details" Style="{StaticResource Button.Link}" HorizontalAlignment="Left" VerticalAlignment="Center"
+              Click="OnCopy" Visibility="Collapsed" />
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button x:Name="ActionButton" Margin="0,0,8,0" Visibility="Collapsed" Click="OnAction" />
+        <Button Content="Close" Style="{StaticResource Button.Accent}" IsDefault="True" IsCancel="True" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</ns:ThemedWindow>

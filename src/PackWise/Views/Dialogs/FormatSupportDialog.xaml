@@ -1,0 +1,45 @@
+<ns:ThemedWindow x:Class="PackWise.Views.Dialogs.FormatSupportDialog"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:ns="https://northstarlabs.dev/design"
+                   IsDialog="True" SizeToContent="Manual" Width="860" Height="600" ResizeMode="CanResize" Title="Supported formats">
+  <Grid Margin="24,20,24,20">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <StackPanel Margin="0,0,0,14">
+      <TextBlock Text="What PackWise can do with each format" Style="{StaticResource Text.Subtitle}" />
+      <TextBlock x:Name="Intro" Style="{StaticResource Text.Caption}" Margin="0,4,0,0" />
+    </StackPanel>
+
+    <Border Grid.Row="1" Background="{DynamicResource Brush.Surface}" BorderBrush="{DynamicResource Brush.Border}" BorderThickness="1" CornerRadius="{StaticResource Radius.Card}" Padding="4">
+      <ListView x:Name="FormatList" Background="Transparent">
+        <ListView.View>
+          <GridView ColumnHeaderContainerStyle="{StaticResource GridView.Header}">
+            <GridViewColumn Header="Format" Width="200" DisplayMemberBinding="{Binding Name}" />
+            <GridViewColumn Header="Extensions" Width="190">
+              <GridViewColumn.CellTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding Extensions}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Extensions}" Foreground="{DynamicResource Brush.TextSecondary}" />
+                </DataTemplate>
+              </GridViewColumn.CellTemplate>
+            </GridViewColumn>
+            <GridViewColumn Header="Open" Width="90" DisplayMemberBinding="{Binding Open}" />
+            <GridViewColumn Header="Extract" Width="70" DisplayMemberBinding="{Binding Extract}" />
+            <GridViewColumn Header="Create" Width="70" DisplayMemberBinding="{Binding Create}" />
+            <GridViewColumn Header="Encryption" Width="130" DisplayMemberBinding="{Binding Encryption}" />
+          </GridView>
+        </ListView.View>
+      </ListView>
+    </Border>
+
+    <Grid Grid.Row="2" Margin="0,14,0,0">
+      <TextBlock Style="{StaticResource Text.Caption}" VerticalAlignment="Center" MaxWidth="600" HorizontalAlignment="Left"
+                 Text="RAR archives can be opened and extracted but not created: RAR creation is proprietary. Repair is not offered for any format." />
+      <Button Content="Close" Style="{StaticResource Button.Accent}" HorizontalAlignment="Right" IsDefault="True" IsCancel="True" />
+    </Grid>
+  </Grid>
+</ns:ThemedWindow>

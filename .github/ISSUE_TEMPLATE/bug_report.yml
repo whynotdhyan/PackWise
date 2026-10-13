@@ -1,0 +1,43 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! For security problems, please use a private
+        [security advisory](https://github.com/whynotdhyan/PackWise/security/advisories/new) instead.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open archive …
+        2. Choose Extract To …
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: PackWise version
+      description: Help › About PackWise
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: Windows 11 24H2
+  - type: textarea
+    id: log
+    attributes:
+      label: Log excerpt (optional)
+      description: Tools › Open log folder. Remove any paths you don't want to share.
+      render: json
