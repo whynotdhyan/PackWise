@@ -37,7 +37,7 @@ jobs:
       # sign artifacts/release/**/PackWise.exe here, before the zip is created.
 
       - name: Create draft release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           draft: true
           tag_name: v${{ inputs.version }}
