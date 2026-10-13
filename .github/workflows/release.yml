@@ -1,8 +1,13 @@
 name: Release
 
+# Run manually from the Actions tab with the version to build, e.g. 1.0.1.
+# Release files can also be built locally with eng/Publish.ps1.
 on:
-  push:
-    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to build (without the v prefix)
+        required: true
 
 permissions:
   contents: write
@@ -26,7 +31,7 @@ jobs:
 
       - name: Publish
         shell: pwsh
-        run: ./eng/Publish.ps1 -Version ('${{ github.ref_name }}'.TrimStart('v')) -SkipTests
+        run: ./eng/Publish.ps1 -Version '${{ inputs.version }}' -SkipTests
 
       # Code signing: when a signing service (for example SignPath Foundation) is set up,
       # sign artifacts/release/**/PackWise.exe here, before the zip is created.
@@ -35,6 +40,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           draft: true
+          tag_name: v${{ inputs.version }}
+          name: PackWise ${{ inputs.version }}
           files: |
+            artifacts/release/*.exe
             artifacts/release/*.zip
             artifacts/release/SHA256SUMS.txt
