@@ -1,19 +1,39 @@
 <p align="center">
-  <img src="src/PackWise/Assets/PackWise-512.png" width="96" alt="PackWise logo" />
-</p>
-
-<h1 align="center">PackWise</h1>
-
-<p align="center">
-  A free archive manager for Windows with the classic, keyboard-friendly workflow you already know,
-  safer extraction, and a built-in duplicate finder.<br />
-  No account. No ads. No telemetry. No cloud.
+  <img src="docs/images/banner.png" alt="PackWise — archives, done safely" />
 </p>
 
 <p align="center">
+  <a href="https://github.com/whynotdhyan/PackWise/releases/latest"><img src="https://img.shields.io/github/v/release/whynotdhyan/PackWise?color=0E8A87&label=download" alt="Latest release" /></a>
   <a href="https://github.com/whynotdhyan/PackWise/actions/workflows/ci.yml"><img src="https://github.com/whynotdhyan/PackWise/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0E8A87" alt="MIT License" /></a>
-  <img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0E8A87" alt="Windows 10 and 11" />
+  <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-0E8A87" alt="Windows 10 and 11" />
+  <a href="https://buymeacoffee.com/whynotdhyan"><img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-support-FFDD00?logo=buymeacoffee&logoColor=black" alt="Buy me a coffee" /></a>
+</p>
+
+<p align="center">
+  <b>A free archive manager for Windows</b> with the classic, keyboard-friendly workflow you already know,<br />
+  safer extraction and a built-in duplicate finder. No account. No ads. No telemetry. No cloud.
+</p>
+
+<p align="center">
+  <a href="https://github.com/whynotdhyan/PackWise/releases/latest"><b>⬇ Download PackWise</b></a> ·
+  <a href="docs/guide/index.html">User guide</a> ·
+  <a href="#features">Features</a> ·
+  <a href="#building-from-source">Build from source</a>
+</p>
+
+## Screenshots
+
+<p align="center">
+  <img src="docs/images/main-light.png" width="49%" alt="Browsing inside an archive with an image preview" />
+  <img src="docs/images/main-dark.png" width="49%" alt="Dark theme with a text preview" />
+</p>
+<p align="center">
+  <img src="docs/images/duplicates.png" width="49%" alt="Duplicate finder" />
+  <img src="docs/images/extract.png" width="35%" alt="Extract dialog with safety summary" />
+</p>
+<p align="center">
+  <img src="docs/images/tour.png" width="60%" alt="Getting-started tour" />
 </p>
 
 ---

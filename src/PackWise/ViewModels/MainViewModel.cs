@@ -404,6 +404,9 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
         UpdateSelectionText();
         UpdateDetails();
         ExtractCommand.NotifyCanExecuteChanged();
+        ExtractHereCommand.NotifyCanExecuteChanged();
+        ExtractToFolderCommand.NotifyCanExecuteChanged();
+        TestCommand.NotifyCanExecuteChanged();
         DeleteCommand.NotifyCanExecuteChanged();
         ViewCommand.NotifyCanExecuteChanged();
     }
